@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios'; // FIX: type-only import
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios'; // FIX: type-only import
 import type { ApiResponse } from '@/types';
 
 const api: AxiosInstance = axios.create({
