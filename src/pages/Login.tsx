@@ -59,7 +59,7 @@ const Login = () => {
       <div className="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-blue-400/30 blur-[100px]" />
       <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-teal-400/30 blur-[100px]" />
 
-      <Card className="z-10 w-full max-w-md border-white/40 bg-white/60 shadow-2xl backdrop-blur-xl">
+      <Card className="z-10 w-full max-w-md mx-4 sm:mx-auto border-white/40 bg-white/60 shadow-2xl backdrop-blur-xl">
         <CardHeader className="text-center space-y-3 pb-6">
           <div className="flex justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-teal-500 shadow-lg text-white">

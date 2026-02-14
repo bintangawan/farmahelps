@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { getData, postData } from '@/services/api';
 import type { Medicine } from '@/types';
 import { cn } from "@/lib/utils";
+import { usePushNotification } from '@/context/PushNotificationContext';
 
 import {
   Command,
@@ -52,6 +53,7 @@ export const AddScheduleModal = ({ onSuccess }: AddScheduleModalProps) => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [medicines, setMedicines] = useState<Medicine[]>([]);
+  const { checkAndPrompt } = usePushNotification();
   
   // Form State
   const [selectedMedicine, setSelectedMedicine] = useState("");
@@ -149,6 +151,8 @@ export const AddScheduleModal = ({ onSuccess }: AddScheduleModalProps) => {
       setSelectedDays([]);
       
       onSuccess();
+      // Cek push subscription setelah aksi penting
+      checkAndPrompt();
     } catch (error) {
       toast.error("Gagal membuat jadwal.");
     } finally {

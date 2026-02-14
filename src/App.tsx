@@ -1,9 +1,20 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider, useAuth } from '@/hooks/useAuth';
+import { PushNotificationProvider } from '@/context/PushNotificationContext';
 import { Loader2 } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { useEffect } from 'react';
+
+// Scroll ke atas setiap kali pindah halaman
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 // --- Import Halaman ---
 import Login from '@/pages/Login';
@@ -56,6 +67,7 @@ const PublicAuthRoute = ({ children }: { children: ReactNode }) => {
 function AppRoutes() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         {/* ================= PUBLIC PAGES (Bebas Akses) ================= */}
         <Route path="/" element={<LandingPage />} />
@@ -146,7 +158,9 @@ function App() {
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <BrowserRouter>
         <AuthProvider>
-           <AppRoutes />
+          <PushNotificationProvider>
+            <AppRoutes />
+          </PushNotificationProvider>
         </AuthProvider>
       </BrowserRouter>
     </GoogleOAuthProvider>

@@ -163,7 +163,7 @@ export const SchedulePage = () => {
 
       <Navbar />
 
-      <main className="container mx-auto px-4 py-8 relative z-10 max-w-5xl">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 max-w-7xl">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
@@ -256,15 +256,15 @@ export const SchedulePage = () => {
                             <div className="h-px bg-slate-100 mb-4" />
 
                             {/* Info Tanggal Lengkap */}
-                            <div className="flex items-center gap-4 text-sm text-slate-500 mb-4 bg-slate-50 p-3 rounded-lg">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm text-slate-500 mb-4 bg-slate-50 p-3 rounded-lg">
                                 <div className="flex items-center gap-2">
-                                    <CalendarDays className="h-4 w-4 text-blue-500" />
-                                    <span>{renderDays(group.days)}</span>
+                                    <CalendarDays className="h-4 w-4 text-blue-500 shrink-0" />
+                                    <span className="text-xs sm:text-sm">{renderDays(group.days)}</span>
                                 </div>
-                                <div className="w-px h-4 bg-slate-300" />
+                                <div className="hidden sm:block w-px h-4 bg-slate-300" />
                                 <div className="flex items-center gap-2">
-                                    <CalendarRange className="h-4 w-4 text-blue-500" />
-                                    <span>{renderDateRange(group.start_date, group.end_date)}</span>
+                                    <CalendarRange className="h-4 w-4 text-blue-500 shrink-0" />
+                                    <span className="text-xs sm:text-sm">{renderDateRange(group.start_date, group.end_date)}</span>
                                 </div>
                             </div>
 

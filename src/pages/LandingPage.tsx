@@ -9,8 +9,7 @@ import {
   LayoutDashboard, 
   CheckCircle2, 
   Bell, 
-  Activity,
-  Menu
+  Activity
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useState, useEffect } from "react";
@@ -87,7 +86,7 @@ export const LandingPage = () => {
                 Aman & Terpercaya
               </div>
               
-              <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
                 Kesehatan Anda, <br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-teal-500">
                   Prioritas Utama.
@@ -229,6 +228,151 @@ export const LandingPage = () => {
         </div>
       </section>
 
+      {/* --- BENEFITS SECTION --- */}
+      <section id="benefits" className="py-24 relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-sm font-bold text-teal-600 uppercase tracking-widest mb-3">Kenapa FarmaHelps?</h2>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900">Manfaat yang Anda Rasakan</h3>
+            <p className="text-slate-600 mt-4">Lebih dari sekadar pengingat — FarmaHelps membantu Anda membangun kebiasaan sehat setiap hari.</p>
+          </div>
+
+          {/* Benefit 1 — Text Left, Visual Right */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-teal-600 text-xs font-bold uppercase tracking-wide">
+                <CheckCircle2 className="h-3.5 w-3.5" /> Kedisiplinan Meningkat
+              </div>
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                Tidak Ada Lagi Dosis yang Terlewat
+              </h4>
+              <p className="text-slate-600 leading-relaxed">
+                Dengan notifikasi push otomatis dan jadwal yang terstruktur, tingkat kepatuhan minum obat Anda meningkat drastis. 
+                Sistem pengingat kami bekerja bahkan saat Anda sedang sibuk.
+              </p>
+              <ul className="space-y-3">
+                {["Notifikasi push real-time ke perangkat", "Jadwal fleksibel: harian, mingguan, custom", "Grafik kepatuhan 7 hari terakhir"].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700">
+                    <CheckCircle2 className="h-5 w-5 text-teal-500 shrink-0 mt-0.5" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-blue-50 rounded-3xl blur-2xl opacity-60" />
+              <div className="relative bg-white border border-slate-100 rounded-3xl shadow-xl p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-teal-100 p-2.5 rounded-xl"><Bell className="h-5 w-5 text-teal-600" /></div>
+                  <div><p className="font-bold text-slate-800">Pengingat Aktif</p><p className="text-xs text-slate-500">3 jadwal hari ini</p></div>
+                </div>
+                {["08:00 — Amoxicillin 500mg", "13:00 — Vitamin D3", "20:00 — Omeprazole"].map((item, i) => (
+                  <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+                    <div className="flex items-center gap-3">
+                      <div className={`h-3 w-3 rounded-full ${i === 0 ? 'bg-green-400' : 'bg-slate-300'}`} />
+                      <span className="text-sm text-slate-700 font-medium">{item}</span>
+                    </div>
+                    {i === 0 && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">Sudah</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Benefit 2 — Visual Left, Text Right */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+            <div className="order-2 md:order-1 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-50 rounded-3xl blur-2xl opacity-60" />
+              <div className="relative bg-white border border-slate-100 rounded-3xl shadow-xl p-6 sm:p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="bg-blue-100 p-2.5 rounded-xl"><Pill className="h-5 w-5 text-blue-600" /></div>
+                  <div><p className="font-bold text-slate-800">Inventory Obat</p><p className="text-xs text-slate-500">4 obat aktif</p></div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { name: "Amoxicillin", stock: "12 Tab", color: "bg-blue-50 border-blue-100" },
+                    { name: "Vitamin D3", stock: "25 Kap", color: "bg-teal-50 border-teal-100" },
+                    { name: "Omeprazole", stock: "8 Tab", color: "bg-orange-50 border-orange-100" },
+                    { name: "Paracetamol", stock: "30 Tab", color: "bg-purple-50 border-purple-100" },
+                  ].map((med, i) => (
+                    <div key={i} className={`p-4 rounded-2xl border ${med.color}`}>
+                      <p className="font-semibold text-slate-800 text-sm">{med.name}</p>
+                      <p className="text-xs text-slate-500 mt-1">Stok: {med.stock}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wide">
+                <Pill className="h-3.5 w-3.5" /> Stok Terkontrol
+              </div>
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                Obat Selalu Tersedia & Aman
+              </h4>
+              <p className="text-slate-600 leading-relaxed">
+                Pantau stok obat, tanggal kadaluarsa, dan BUD (Beyond Use Date) dari satu tempat. 
+                Anda akan mendapat peringatan otomatis sebelum obat habis atau kedaluwarsa.
+              </p>
+              <ul className="space-y-3">
+                {["Peringatan otomatis saat stok menipis", "Tracking kadaluarsa & BUD setelah segel dibuka", "Kategorisasi obat: tablet, kapsul, sirup, dll"].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700">
+                    <CheckCircle2 className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Benefit 3 — Text Left, Visual Right */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-purple-600 text-xs font-bold uppercase tracking-wide">
+                <BookOpen className="h-3.5 w-3.5" /> Riwayat Lengkap
+              </div>
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                Catatan Kesehatan untuk Konsultasi Dokter
+              </h4>
+              <p className="text-slate-600 leading-relaxed">
+                Jurnal kesehatan membantu Anda mencatat keluhan, efek samping, dan mood harian. 
+                Data ini sangat berharga saat konsultasi dengan dokter atau apoteker Anda.
+              </p>
+              <ul className="space-y-3">
+                {["Catat keluhan & efek samping harian", "Tracking mood: senang, netral, sedih, cemas", "Riwayat lengkap bisa dibagikan ke dokter"].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700">
+                    <CheckCircle2 className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-50 rounded-3xl blur-2xl opacity-60" />
+              <div className="relative bg-white border border-slate-100 rounded-3xl shadow-xl p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-purple-100 p-2.5 rounded-xl"><BookOpen className="h-5 w-5 text-purple-600" /></div>
+                  <div><p className="font-bold text-slate-800">Jurnal Saya</p><p className="text-xs text-slate-500">Februari 2026</p></div>
+                </div>
+                {[
+                  { date: "15 Feb", mood: "😊", title: "Merasa lebih baik hari ini", color: "bg-green-50" },
+                  { date: "14 Feb", mood: "😐", title: "Sedikit pusing setelah makan obat", color: "bg-yellow-50" },
+                  { date: "13 Feb", mood: "😟", title: "Sulit tidur, perlu konsultasi", color: "bg-red-50" },
+                ].map((entry, i) => (
+                  <div key={i} className={`flex items-center gap-4 p-3 rounded-xl ${entry.color}`}>
+                    <span className="text-2xl">{entry.mood}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-slate-800 truncate">{entry.title}</p>
+                      <p className="text-xs text-slate-500">{entry.date}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- CTA SECTION --- */}
       <section className="py-20 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
@@ -277,6 +421,7 @@ export const LandingPage = () => {
                 <h5 className="font-bold text-slate-900">Produk</h5>
                 <ul className="space-y-2 text-slate-600">
                   <li><a href="#features" className="hover:text-blue-600">Fitur</a></li>
+                  <li><a href="#benefits" className="hover:text-blue-600">Manfaat</a></li>
                   <li><Link to="/register" className="hover:text-blue-600">Daftar</Link></li>
                   <li><Link to="/login" className="hover:text-blue-600">Masuk</Link></li>
                 </ul>

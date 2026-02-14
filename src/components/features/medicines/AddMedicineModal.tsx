@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { postData } from '@/services/api';
+import { usePushNotification } from '@/context/PushNotificationContext';
 
 interface AddMedicineModalProps {
   onSuccess: () => void;
@@ -16,6 +17,7 @@ interface AddMedicineModalProps {
 export const AddMedicineModal = ({ onSuccess }: AddMedicineModalProps) => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { checkAndPrompt } = usePushNotification();
   
   const [formData, setFormData] = useState({
     name: '',
@@ -45,7 +47,9 @@ export const AddMedicineModal = ({ onSuccess }: AddMedicineModalProps) => {
       toast.success("Obat berhasil ditambahkan!");
       setFormData({ name: '', description: '', medicine_type: '', indication: '', stock: '', unit: 'Tablet', expired_date: '', bud_days: '' });
       setOpen(false);
-      onSuccess(); 
+      onSuccess();
+      // Cek push subscription setelah aksi penting
+      checkAndPrompt();
     } catch (error) {
       toast.error("Gagal menambahkan obat.");
     } finally {
@@ -57,7 +61,7 @@ export const AddMedicineModal = ({ onSuccess }: AddMedicineModalProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white shadow-lg shadow-blue-500/20 rounded-xl px-6 transition-all w-full sm:w-auto h-11">
-          <Plus className="mr-2 h-5 w-5" /> Tambah Obat
+          <Plus className="mr-2 h-4 w-4" /> Tambah Obat
         </Button>
       </DialogTrigger>
       
@@ -89,7 +93,7 @@ export const AddMedicineModal = ({ onSuccess }: AddMedicineModalProps) => {
             </div>
 
             {/* Grid: Jenis & Kegunaan */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                     <Label htmlFor="medicine_type" className="flex items-center gap-2">
                         <Tag className="w-3.5 h-3.5 text-blue-500" /> Jenis Obat
@@ -105,7 +109,7 @@ export const AddMedicineModal = ({ onSuccess }: AddMedicineModalProps) => {
             </div>
 
             {/* Grid: Stok & Satuan */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                     <Label htmlFor="stock">Stok Awal</Label>
                     <div className="relative">

@@ -34,6 +34,25 @@ import { getData } from "@/services/api";
 import { formatDistanceToNow } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
 
+// Komponen Avatar yang aman (handle error load gambar Google)
+const SafeAvatar = ({ src, alt, className, iconClassName }: { src?: string; alt: string; className?: string; iconClassName?: string }) => {
+  const [imgError, setImgError] = useState(false);
+
+  if (!src || imgError) {
+    return <User className={iconClassName || "h-5 w-5 text-slate-600"} />;
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className || "h-full w-full object-cover"}
+      referrerPolicy="no-referrer"
+      onError={() => setImgError(true)}
+    />
+  );
+};
+
 // Definisi Tipe Data Notifikasi sesuai Database
 interface NotificationLog {
   id: number;
@@ -83,8 +102,8 @@ export const Navbar = () => {
   useEffect(() => {
     fetchNotifications();
 
-    // Polling setiap 30 detik (Auto Refresh)
-    const interval = setInterval(fetchNotifications, 30000);
+    // Polling setiap 60 detik (Auto Refresh)
+    const interval = setInterval(fetchNotifications, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -154,15 +173,7 @@ export const Navbar = () => {
                 <div className="absolute bottom-0 left-0 w-full p-4 border-t border-slate-100 bg-slate-50/50">
                   <div className="flex items-center gap-3 px-2 mb-4">
                     <div className="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 shadow-sm overflow-hidden">
-                      {user?.avatar_url ? (
-                        <img
-                          src={user.avatar_url}
-                          alt="Avatar"
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <User className="h-5 w-5" />
-                      )}
+                      <SafeAvatar src={user?.avatar_url} alt="Avatar" iconClassName="h-5 w-5" />
                     </div>
                     <div className="overflow-hidden">
                       <p className="text-sm font-semibold text-slate-800 truncate">
@@ -318,15 +329,7 @@ export const Navbar = () => {
               </p>
             </div>
             <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 border border-white shadow-sm flex items-center justify-center overflow-hidden">
-              {user?.avatar_url ? (
-                <img
-                  src={user.avatar_url}
-                  alt="Profile"
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <User className="h-5 w-5 text-slate-600" />
-              )}
+              <SafeAvatar src={user?.avatar_url} alt="Profile" iconClassName="h-5 w-5 text-slate-600" />
             </div>
           </div>
 
